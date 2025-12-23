@@ -1,0 +1,36 @@
+<aside class="sidebar">
+  <!-- Logo Section -->
+  <div class="sidebar-header">
+    <img src="assets/images/logo_terracanada.png" alt="Terra Canada Logo" class="sidebar-logo" />
+  </div>
+
+  <!-- User Profile -->
+  <div class="user-profile">
+    <div class="user-avatar">{{ userInitials }}</div>
+    <div class="user-info">
+      <p class="user-name">{{ userName }}</p>
+    </div>
+  </div>
+
+  <!-- Menu Items -->
+  <nav class="sidebar-menu">
+    <button
+      *ngFor="let item of menuItems"
+      class="menu-item"
+      [class.active]="isActive(item.route)"
+      (click)="navigateTo(item.route)"
+      [attr.data-id]="item.id">
+      <i [ngClass]="item.icon"></i>
+      <span class="menu-label">{{ getMenuLabel(item) | translate }}</span>
+      <span *ngIf="item.badge" class="menu-badge">{{ item.badge }}</span>
+    </button>
+  </nav>
+
+  <!-- Logout Button -->
+  <div class="sidebar-footer">
+    <button class="logout-btn" (click)="navigateTo('/login')">
+      <i class="pi pi-sign-out"></i>
+      <span>{{ 'logout' | translate }}</span>
+    </button>
+  </div>
+</aside>

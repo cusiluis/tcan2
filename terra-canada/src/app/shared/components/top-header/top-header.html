@@ -1,0 +1,97 @@
+<header class="top-header" (click)="closeMenus()">
+  <!-- Search Bar -->
+  <div class="header-search">
+    <i class="pi pi-search"></i>
+    <input
+      type="text"
+      [placeholder]="'search' | translate"
+      [(ngModel)]="searchQuery"
+      (input)="onSearch(searchQuery)"
+      class="search-input"
+    />
+  </div>
+
+  <!-- Right Actions -->
+  <div class="header-actions">
+    <!-- Notifications -->
+    <div class="action-item notifications-container" (click)="$event.stopPropagation()">
+      <button
+        class="action-btn"
+        (click)="toggleNotifications()"
+        [title]="'notifications' | translate">
+        <i class="pi pi-bell"></i>
+        <span class="notification-badge">3</span>
+      </button>
+
+      <!-- Notifications Dropdown -->
+      <div class="notifications-dropdown" *ngIf="showNotifications">
+        <div class="dropdown-header">
+          <h4>{{ 'notifications' | translate }}</h4>
+        </div>
+        <div class="notifications-list">
+          <div *ngIf="notifications.length > 0; else noNotifications">
+            <div *ngFor="let notif of notifications" class="notification-item">
+              <p class="notification-message">{{ notif.message }}</p>
+              <span class="notification-time">{{ notif.time }}</span>
+            </div>
+          </div>
+          <ng-template #noNotifications>
+            <p class="no-notifications">{{ 'noNotifications' | translate }}</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark Mode Toggle -->
+    <button
+      class="action-btn"
+      (click)="toggleTheme()"
+      [title]="theme === 'light' ? ('darkMode' | translate) : ('lightMode' | translate)">
+      <i [class]="theme === 'light' ? 'pi pi-moon' : 'pi pi-sun'"></i>
+    </button>
+
+    <!-- Fullscreen Toggle -->
+    <button
+      class="action-btn"
+      (click)="toggleFullscreen()"
+      [title]="isFullscreen ? ('exitFullscreen' | translate) : ('fullscreen' | translate)">
+      <i [class]="isFullscreen ? 'pi pi-window-minimize' : 'pi pi-window-maximize'"></i>
+    </button>
+
+    <!-- Language Selector -->
+    <div class="action-item language-container" (click)="$event.stopPropagation()">
+      <button
+        class="action-btn"
+        (click)="toggleLanguageMenu()"
+        [title]="'language' | translate">
+        <i class="pi pi-globe"></i>
+        <span class="language-code">{{ language.toUpperCase() }}</span>
+      </button>
+
+      <!-- Language Dropdown -->
+      <div class="language-dropdown" *ngIf="showLanguageMenu">
+        <button
+          class="language-option"
+          [class.active]="language === 'es'"
+          (click)="selectLanguage('es')">
+          <i class="pi pi-check" *ngIf="language === 'es'"></i>
+          {{ 'spanish' | translate }}
+        </button>
+        <button
+          class="language-option"
+          [class.active]="language === 'en'"
+          (click)="selectLanguage('en')">
+          <i class="pi pi-check" *ngIf="language === 'en'"></i>
+          {{ 'english' | translate }}
+        </button>
+        <button
+          class="language-option"
+          [class.active]="language === 'fr'"
+          (click)="selectLanguage('fr')">
+          <i class="pi pi-check" *ngIf="language === 'fr'"></i>
+          {{ 'french' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
