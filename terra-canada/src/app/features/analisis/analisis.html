@@ -1,0 +1,68 @@
+<div class="analisis-layout">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+
+  <!-- Main Content -->
+  <main class="analisis-content">
+    <!-- Top Header -->
+    <app-top-header></app-top-header>
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="header-left">
+        <h1>{{ 'analisisReportes' | translate }}</h1>
+        <p class="header-subtitle">{{ 'inteligenciaNegocio' | translate }}</p>
+      </div>
+    </div>
+
+    <!-- Content Container -->
+    <div class="content-container">
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <app-stat-card *ngFor="let stat of stats" [stat]="stat"></app-stat-card>
+      </div>
+
+      <!-- Charts Grid -->
+      <div class="charts-grid">
+        <!-- Row 1: Pie, Bar, Comparative -->
+        <app-pie-chart></app-pie-chart>
+        <app-bar-chart></app-bar-chart>
+        <app-line-chart></app-line-chart>
+
+        <!-- Row 2: Cash Flow, Heatmap, Funnel -->
+        <app-line-chart [chartType]="'cashflow'"></app-line-chart>
+        <app-heatmap-chart></app-heatmap-chart>
+        <app-funnel-chart></app-funnel-chart>
+      </div>
+
+      <!-- Export and Reports Section -->
+      <div class="export-section">
+        <div class="export-header">
+          <h3>
+            <i class="pi pi-download"></i>
+            {{ 'exportarDatos' | translate }}
+          </h3>
+        </div>
+
+        <div class="export-buttons-grid">
+          <button class="export-btn excel-btn" (click)="exportExcel()">
+            <i class="pi pi-file-excel"></i>
+            <span>{{ 'exportarExcel' | translate }}</span>
+          </button>
+          <button class="export-btn csv-btn" (click)="exportCSV()">
+            <i class="pi pi-file"></i>
+            <span>{{ 'exportarCSV' | translate }}</span>
+          </button>
+          <button class="export-btn pdf-btn" (click)="exportPDF()">
+            <i class="pi pi-file-pdf"></i>
+            <span>{{ 'generarPDF' | translate }}</span>
+          </button>
+          <button class="export-btn json-btn" (click)="exportJSON()">
+            <i class="pi pi-code"></i>
+            <span>{{ 'exportarJSON' | translate }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

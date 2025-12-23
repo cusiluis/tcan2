@@ -1,0 +1,68 @@
+<div class="configuracion-layout">
+  <!-- Notificaciones -->
+  <app-notification
+    [notifications]="notifications"
+    (notificationDismissed)="onNotificationDismissed($event)"
+  ></app-notification>
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+
+  <!-- Main Content -->
+  <div class="configuracion-content">
+    <!-- Top Header -->
+    <app-top-header></app-top-header>
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="header-content">
+        <h1>
+          <i class="pi pi-cog"></i>
+          {{ 'configuracion' | translate }}
+        </h1>
+        <p class="header-subtitle">{{ 'personalizaExperiencia' | translate }}</p>
+      </div>
+    </div>
+
+    <!-- Content Container -->
+    <div class="content-container">
+      <!-- Tabs Navigation -->
+      <div class="tabs-section">
+        <div class="tabs-container">
+          <button
+            *ngFor="let tab of tabs"
+            class="tab-button"
+            [class.active]="activeTab === tab.id"
+            (click)="selectTab(tab.id)"
+            [attr.data-tab]="tab.id"
+          >
+            <i [ngClass]="'pi ' + tab.icon"></i>
+            <span class="tab-label">{{ tab.label }}</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab Content -->
+      <div class="tab-content">
+        <!-- Perfil Tab -->
+        <div *ngIf="activeTab === 'perfil'" class="tab-pane active">
+          <app-configuracion-perfil></app-configuracion-perfil>
+        </div>
+
+        <!-- Notificaciones Tab -->
+        <div *ngIf="activeTab === 'notificaciones'" class="tab-pane active">
+          <app-configuracion-notificaciones></app-configuracion-notificaciones>
+        </div>
+
+        <!-- Seguridad Tab -->
+        <div *ngIf="activeTab === 'seguridad'" class="tab-pane active">
+          <app-configuracion-seguridad></app-configuracion-seguridad>
+        </div>
+
+        <!-- Usuarios Tab (solo admin) -->
+        <div *ngIf="activeTab === 'usuarios'" class="tab-pane active">
+          <app-configuracion-usuarios></app-configuracion-usuarios>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

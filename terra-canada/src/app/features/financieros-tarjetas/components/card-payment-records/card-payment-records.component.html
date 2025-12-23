@@ -1,0 +1,32 @@
+<div class="payment-records-section">
+  <div class="section-header">
+    <h3>
+      <i class="pi pi-list"></i>
+      {{ 'registrosPagos' | translate }}
+    </h3>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <i class="pi pi-spin pi-spinner"></i>
+    <p>{{ 'cargando' | translate }}</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="errorMessage && !isLoading" class="error-state">
+    <i class="pi pi-exclamation-circle"></i>
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <!-- Tabla Genérica Paginada -->
+  <app-paginated-table
+    *ngIf="!isLoading && !errorMessage"
+    [data]="pagos"
+    [columns]="columns"
+    [actions]="actions"
+    [itemsPerPage]="10"
+    [maxHeight]="'600px'"
+    [showPaginationInfo]="true"
+    (onAction)="onTableAction($event)"
+  ></app-paginated-table>
+</div>
